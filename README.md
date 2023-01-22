@@ -1,4 +1,4 @@
-# Project 1 - Cloud Continuous Delivery of Microservice
+# Project 1 - Rust Command Line Tool
 
 
 ## References
