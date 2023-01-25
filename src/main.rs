@@ -21,7 +21,7 @@ fn main() {
     let args = Cli::parse();
     match args.command {
         Some(Commands::Generate { noise }) => {
-            let (_x, _z) = clt::data(&noise);
+            let (_x, _y, _z) = clt::data(&noise);
             println!("Data Generated");
         }
         None => println!("Missing noise value"),
