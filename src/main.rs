@@ -1,10 +1,29 @@
-// create main function that calls function from lib.rs file
-mod lib;
-use lib::data;
+//A command-line tool to generate fake data
+use clap::Parser;
+
+#[derive(Parser)]
+#[clap(version = "0.1.0", author = "Alison", about = "A fake data generator")]
+struct Cli {
+    #[clap(subcommand)]
+    command: Option<Commands>,
+}
+
+#[derive(Parser)]
+enum Commands {
+    #[clap(version = "0.1.0", author = "Alison")]
+    Generate {
+        #[clap(short, long)]
+        noise: f64,
+    },
+}
 
 fn main() {
-    let (x, z) = data();
-    let mut fg = Figure::new();
-    fg.axes2d().lines(&x, &y, &[Caption("Data")]);
-    fg.show();
+    let args = Cli::parse();
+    match args.command {
+        Some(Commands::Generate { noise }) => {
+            let (_x, _z) = clt::data(&noise);
+            println!("Data Generated");
+        }
+        None => println!("Missing noise value"),
+    }
 }
