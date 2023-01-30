@@ -13,17 +13,24 @@ enum Commands {
     #[clap(version = "0.1.0", author = "Alison")]
     Generate {
         #[clap(short, long)]
-        noise: f64,
+        len: i32,
+        range: f64,
+        noisemax: f64,
     },
 }
 
 fn main() {
     let args = Cli::parse();
     match args.command {
-        Some(Commands::Generate { noise }) => {
-            let (_x, _y, _z) = clt::data(&noise);
-            println!("Data Generated");
+        Some(Commands::Generate {
+            len,
+            range,
+            noisemax,
+        }) => {
+            let (_x, _y) = clt::data(len, range, noisemax);
+            let r2 = clt::r_squared(&_x, &_y);
+            println!("{}", r2);
         }
-        None => println!("Missing noise value"),
+        None => println!("Missing function parameter"),
     }
 }
