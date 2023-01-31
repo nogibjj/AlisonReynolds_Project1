@@ -22,15 +22,16 @@ pub fn data(len: i32, range: f64, noisemax: f64) -> (Vec<f64>, Vec<f64>) {
     (x, y)
 }
 
-// function to calculate the r-squared value between two vectors
-pub fn r_squared(x: &Vec<f64>, y: &Vec<f64>) -> f64 {
+// function to calculate the correlation between two vectors
+pub fn correlation(x: &Vec<f64>, y: &Vec<f64>) -> f64 {
     let x_mean = x.iter().sum::<f64>() / x.len() as f64;
     let y_mean = y.iter().sum::<f64>() / y.len() as f64;
-    let numerator: f64 = x
+    let x_std = x.iter().map(|x| (x - x_mean).powi(2)).sum::<f64>().sqrt();
+    let y_std = y.iter().map(|y| (y - y_mean).powi(2)).sum::<f64>().sqrt();
+    let xy = x
         .iter()
         .zip(y.iter())
         .map(|(x, y)| (x - x_mean) * (y - y_mean))
-        .sum();
-    let denominator: f64 = x.iter().map(|x| (x - x_mean).powi(2)).sum();
-    (numerator / denominator).powi(2)
+        .sum::<f64>();
+    xy / (x_std * y_std)
 }

@@ -14,7 +14,9 @@ enum Commands {
     Generate {
         #[clap(short, long)]
         len: i32,
+        #[clap(short, long)]
         range: f64,
+        #[clap(short, long)]
         noisemax: f64,
     },
 }
@@ -28,8 +30,8 @@ fn main() {
             noisemax,
         }) => {
             let (_x, _y) = clt::data(len, range, noisemax);
-            let r2 = clt::r_squared(&_x, &_y);
-            println!("{}", r2);
+            let corr = clt::correlation(&_x, &_y);
+            println!("{}", corr);
         }
         None => println!("Missing function parameter"),
     }
