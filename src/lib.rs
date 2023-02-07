@@ -40,7 +40,7 @@ pub fn correlation(x: &Vec<f64>, y: &Vec<f64>) -> f64 {
 pub fn plot(x: Vec<f64>, y: Vec<f64>, range: f64, noisemax: f64) {
     let data: Vec<(f64, f64)> = x.iter().cloned().zip(y.iter().cloned()).collect();
     let full_range = range.powi(2) + noisemax;
-    let root_area = BitMapBackend::new("plot.png", (700, 400)).into_drawing_area();
+    let root_area = BitMapBackend::new("scatter.png", (700, 400)).into_drawing_area();
     root_area.fill(&WHITE).unwrap();
 
     let mut ctx = ChartBuilder::on(&root_area)
