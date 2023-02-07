@@ -2,7 +2,11 @@
 use clap::Parser;
 
 #[derive(Parser)]
-#[clap(version = "0.1.0", author = "Alison", about = "A fake data generator")]
+#[clap(
+    version = "0.1.0",
+    author = "Alison",
+    about = "A fake data generator and plotter"
+)]
 struct Cli {
     #[clap(subcommand)]
     command: Option<Commands>,
@@ -29,8 +33,9 @@ fn main() {
             range,
             noisemax,
         }) => {
-            let (_x, _y) = clt::data(len, range, noisemax);
-            let corr = clt::correlation(&_x, &_y);
+            let (x, y) = clt::data(len, range, noisemax);
+            let corr = clt::correlation(&x, &y);
+            clt::plot(x, y, range, noisemax);
             println!("{}", corr);
         }
         None => println!("Missing function parameter"),
