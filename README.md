@@ -6,7 +6,7 @@ Additionally, the product produces a scatter plot of the points generated:
 
 Finally, there is some basic testing to ensure the tool is running correctly. For a vector length of 100, the product runs in 0.86 seconds. For a vector length of 100,000, the product runs in 1.68 seconds.
 
-![Diagram](diagram.png)
+![Diagram](project_diagram.png)
 
 ## References
 
